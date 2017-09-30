@@ -1,0 +1,1 @@
+select mk.code as make_code, mk.title as make_title, md.code, md.title from public.model md, public.make mk where mk.id=md.make_id and mk.code=?
