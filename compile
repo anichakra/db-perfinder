@@ -1,3 +1,6 @@
-mkdir bin
+if [ ! -d "bin" ]; then
+  mkdir bin
+fi
+
 javac -sourcepath src -d bin src/org/anichakra/tools/db/perfinder/Application.java
 jar cvfe db-perfinder.jar  org.anichakra.tools.db.perfinder.Application -C bin/ .
