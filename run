@@ -1,0 +1,2 @@
+mkdir log
+java -Djdbc.properties=config/jdbc.properties -Djava.util.logging.config.file=config/logging.properties -jar db-perfinder.jar
