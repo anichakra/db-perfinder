@@ -15,6 +15,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -131,7 +132,7 @@ public class RdbmsPerfinder implements AutoCloseable {
         }
     }
 
-    public void prepareStatement(String query, Integer fetchSize, String... parameters) {
+    public void prepareStatement(String query, Integer fetchSize, Integer maxRows, String... parameters) {
         if (query == null || query.trim().length() == 0)
             throw new IllegalArgumentException("query is not provided!");
         assert connection != null : "Connection is null! Load JDBC Driver and create Connection First";
@@ -143,6 +144,8 @@ public class RdbmsPerfinder implements AutoCloseable {
             }
             if (fetchSize != null)
                 pstmt.setFetchSize(fetchSize);
+            if(maxRows!=null)
+                pstmt.setMaxRows(maxRows);
         } catch (SQLException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException("Cannot create PreparedStatement!", e);
         }
@@ -158,7 +161,7 @@ public class RdbmsPerfinder implements AutoCloseable {
         }
     }
 
-    public List<Map<String, Object>> fetchResult(Integer rowIndex, Integer maxRows) {
+    public List<Map<String, Object>> fetchResult(Integer rowIndex) {
 
         List<Map<String, Object>> result = new LinkedList<>();
         try {
@@ -166,13 +169,13 @@ public class RdbmsPerfinder implements AutoCloseable {
             if (rowIndex != null)
                 rs.absolute(rowIndex);
 
-            int count = 0;
+         //   int count = 0;
             while (rs.next()) {
-                if (maxRows != null && count >= maxRows)
-                    break;
+              //  if (maxRows != null && count >= maxRows)
+                 //   break;
                 Map<String, Object> row = mapRow(rs, columns);
                 result.add(row);
-                count++;
+              //  count++;
             }
             rs.close();
         } catch (SQLException e) {
@@ -182,7 +185,7 @@ public class RdbmsPerfinder implements AutoCloseable {
     }
 
     private static Map<String, Object> mapRow(ResultSet rs, String[] columns) throws SQLException {
-        Map<String, Object> record = new HashMap<>(columns.length);
+        Map<String, Object> record = new LinkedHashMap<>(columns.length);
         for (int i = 0; i < columns.length; i++) {
             record.put(columns[i], rs.getObject(i + 1));
         }
@@ -216,13 +219,13 @@ public class RdbmsPerfinder implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        if (pstmt != null) {
+        if (pstmt != null && !pstmt.isClosed()) {
             try {
                 pstmt.close();
             } catch (SQLException e) {
             }
         }
-        if (connection != null) {
+        if (connection != null && !connection.isClosed()) {
             try {
                 connection.close();
             } catch (SQLException e) {
