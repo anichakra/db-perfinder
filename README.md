@@ -53,7 +53,7 @@ In case of Windows use the .bat file instead.
 
 ### Logging
 
-The application uses java.util.logging to log INFO, FINE and SEVERE logs. By default the console logs INFO and SEVERE, while FINE logs are printed in the log file created in 'log' directory. The default logging configuration is placed in config/logging.properties. A sample result in log file is given below:
+The application uses java.util.logging to log INFO, FINE and SEVERE log messages. By default the console logs INFO and SEVERE, while FINE logs are printed in the log file created in 'log' directory. Each log file is replaced in each run, so ensure to copy it somewhere if need to be preserved. The default logging configuration is placed in config/logging.properties. A sample result in log file is given below:
 
 ```
 JDBC Properties:{jdbc.jarPath=/home/db-perfinder/lib/postgresql-42.1.4.jar, jdbc.maxRows=100, jdbc.queryRun=9, jdbc.url=jdbc:postgresql://localhost:5432/fleet, jdbc.query=select mk.code as make_code, mk.title as make_title, md.code, md.title from public.model md, public.make mk where mk.id=md.make_id and mk.code=?, jdbc.parameters=ACURA, jdbc.driver=org.postgresql.Driver  , jdbc.username=postgres , jdbc.rowIndex=10, jdbc.fetchSize=10}
