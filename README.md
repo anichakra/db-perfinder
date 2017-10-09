@@ -34,6 +34,7 @@ You will find 'db-perfinder' directory created under $HOME/git path. Go inside '
 
 ```
 cd db-perfinder
+chmod +x compile
 ./compile
 ```
 In case of Windows use the .bat file instead.
@@ -45,6 +46,7 @@ After the db-perfinder.jar is succesfully created, update the JDBC properties in
 To run the application just fire the run command.
 
 ```
+chmod +x run
 ./run
 ```
 In case of Windows use the .bat file instead.
