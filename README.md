@@ -9,7 +9,7 @@ To use this tool you need to install JDK 1.8 in your PC or Server. The tool requ
 The tool executes a query (can be parameterized also) in 3 times by default and provides the average query execution time and the data fetch time. The number of query executions as part of the test can be configurable. The tool also reports the records as a result of the query along with number of records fetched. One can provide pagination to the query also v.i.z. begin index or row index and maximum number of rows to fetch.
 
 ### Prerequisites
-Only JDK 1.8 need to be installed and connectivity to the database where the query will be run. You need to set or JAVA_HOME that points to correct JDK installation directory. Optionally you can install Git to clone this source code or you can simply download it and keep it in any prefered directory.
+Only JDK 1.8 need to be installed and connectivity to the database where the query will be run. You need to configure JAVA_HOME properly so that it points to correct JDK installation directory. 
 
 Check JAVA_HOME:
 
@@ -24,7 +24,7 @@ set JAVA_HOME=/opt/jdk1.8_144
 
 ### Installing
 
-This code can be downloaded or cloned using Git from github:
+The source code can be downloaded from github into a preferred directory. Optionally you can install Git to clone this source code or you can simply download it and keep it in any prefered directory.:
 
 ```
 git clone https://github.com/anichakra/db-perfinder
