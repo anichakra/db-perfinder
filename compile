@@ -2,12 +2,12 @@ if [ ! -d "bin" ]; then
   mkdir bin
 fi
 echo "Running javac"
-javac -sourcepath src -d bin src/org/anichakra/tools/db/perfinder/Application.java
-if [ $? -ne 0 ]; then { echo "Failed, aborting." ; exit 1; } fi
+"$JAVA_HOME/bin/javac" -sourcepath src -d bin src/org/anichakra/tools/db/perfinder/Application.java
+if [ $? -ne 0 ]; then { echo "Compilation failed!" ; exit 1; } fi
 
 echo "Creating jar"
-jar cvfe db-perfinder.jar  org.anichakra.tools.db.perfinder.Application -C bin/ .
+"$JAVA_HOME/bin/jar" cvfe db-perfinder.jar  org.anichakra.tools.db.perfinder.Application -C bin/ .
 
-if [ $? -ne 0 ]; then { echo "Failed, aborting." ; exit 1; } fi
+if [ $? -ne 0 ]; then { echo "Jar creation failed!" ; exit 1; } fi
 
 echo "Done."
